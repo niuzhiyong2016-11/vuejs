@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>留言板</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+</head>
+<body style="margin: 20px auto;">
+<div id="app">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="title" class="control-label">标题</label>
+                        <input type="text" id="title" class="form-control" v-model="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="content" class="control-label">内容</label>
+                        <textarea id="content" class="form-control" v-model="content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" @click.prevent="addLeave">添加留言</button>
+                        <button type="reset" class="btn btn-warning">重置</button>
+                        <button type="button" class="btn btn-danger pull-right" @click="clear">清空历史留言</button>
+                    </div>
+                </form>
+                <ul style="height: 360px; overflow: auto;" class="list-group">
+                    <li class="list-group-item" v-for="message in messages">
+                        <h4>标题：{{message.title}}</h4>
+                        <p>时间:{{message.createAt | date('aaa', 'bbb')}}</p>
+                        <p>内容：{{message.content}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="lib/vue/dist/vue.js"></script>
+<script src="lib/vue-resource/dist/vue-resource.js"></script>
+<script>
+    function addZero(data) {
+        return data >= 10 ? data : '0' + data;
+    }
+    /**
+     * Vue2.0 无内置过滤器
+     */
+    Vue.filter('date', function (input, param1, param2) {
+        var date = new Date(input);
+        return `${addZero(date.getFullYear())}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())} ${addZero(date.getHours())}时${addZero(date.getMinutes())}分${addZero(date.getSeconds())}秒`;
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            title: '',
+            content: '',
+            messages: []
+        },
+        mounted: function () {
+            this.$http.get('/getAllLeaves').then(function (res) {
+                this.messages = res.body;
+            });
+        },
+        methods: {
+            addLeave() {
+                this.$http.post('/addLeave', {title: this.title, content: this.content})
+                    .then(function (res) {
+                        this.title = '';
+                        this.content = '';
+                        this.messages.push(res.body);
+                });
+            },
+            clear() {
+                this.$http.get('/clear').then(function (res) {
+                    if (res.body.ok === 1) {
+                        this.messages = [];
+                    }
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

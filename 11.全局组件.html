@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue2.0生命周期</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+</head>
+<body style="margin: 20px;">
+<div id="app">
+    <hello :msg1="msg"></hello>
+</div>
+<div id="app1">
+    <hello :msg1="msg"></hello>
+</div>
+<script src="vue2.0.js"></script>
+<script>
+    /*var et = Vue.extend({
+        template: '<h1>{{msg}}</h1>',
+        data() {
+            return {
+                msg: 'hello Vue'
+            };
+        }
+    });
+    Vue.component('hello', et);*/
+
+    Vue.component('hello', {
+        template: '<h1>{{msg1}}</h1>',
+        props: {msg1: String},
+        data() {
+            return {
+                msg: 'hello Vue.js'
+            };
+        }
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello Vue'
+        }
+    });
+
+    var vm1 = new Vue({
+        el: '#app1',
+        data: {
+            msg: 'hello Vue'
+        }
+    });
+</script>
+</body>
+</html>

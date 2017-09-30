@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性获取和设置</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+    <style>
+        [v-cloak] { display: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="app">
+        <p v-cloak>{{msg}}</p>
+        <p v-cloak>{{total}} {{count}}</p>
+    </div>
+</div>
+<script src="lib/vue/dist/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: '防止闪烁',
+            price: 100,
+            count: 2
+        },
+        computed: {
+            total: {
+                get: function () {
+                    return this.price * this.count;
+                },
+                set: function (total) {
+                    this.count = total / this.price;
+                }
+            }
+        }
+    });
+    vm.total = 500;
+    console.log(vm);
+</script>
+</body>
+</html>

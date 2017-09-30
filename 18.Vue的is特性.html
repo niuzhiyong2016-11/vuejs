@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的is特性</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+</head>
+<body style="margin: 20px;">
+<div id="app">
+    <button type="button" class="btn btn-success" @click="temp='hello'">hello</button>
+    <button type="button" class="btn btn-success" @click="temp='hello1'">hello1</button>
+    <!-- 如果把切换出去的组件保留在内存中，可以保留它的状态或避免重新渲染。 -->
+    <keep-alive>
+        <component :is="temp"></component>
+    </keep-alive>
+</div>
+<script src="vue2.0.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello Vue',
+            temp: 'hello'
+        },
+        components: {
+            hello: {
+                template: '<h1>hello Vue</h1>'
+            },
+            hello1: {
+                template: '<h1>你好</h1>'
+            }
+        }
+    });
+</script>
+</body>
+</html>

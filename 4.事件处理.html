@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <div id="app">
+        <div @click.stop.prevent="parent('world', $event, 'hello')">
+            parent
+            <div @click.stop="child1">
+                child1
+                <div>
+                    <a @click.once.stop="child2">child2</a>
+                </div>
+            </div>
+        </div>
+        <input type="text" v-model="msg" @keyup.up="up">
+    </div>
+</div>
+<script src="lib/vue/dist/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: ''
+        },
+        methods: {
+            parent(str1, e, str2) {
+                console.log('parent');
+                console.log(str1);
+                console.log(e);
+                console.log(str2);
+            },
+            child1() {
+                alert('child1');
+            },
+            child2() {
+                return window.open('https://www.baidu.com');
+            },
+            up() {
+                alert('up');
+            }
+        }
+    });
+    Vue.config.keyCodes = {
+        v: 86,
+        f1: 112,
+        // camelCase 不可用
+        mediaPlayPause: 179,
+        // 取而代之的是 kebab-case 且用双引号括起来
+        "media-play-pause": 179,
+        up: [38, 87]
+    };
+    /**
+     * 修饰符
+     *   .stop
+     *   .prevent
+     *   .self
+     *   .once
+     *
+     *   .enter
+     *   .esc
+     *   .tab
+     *   .delete
+     *   .space
+     *   .left
+     *   .up
+     *   .right
+     *   .down
+     */
+</script>
+</body>
+</html>

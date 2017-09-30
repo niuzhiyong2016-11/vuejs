@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>父子传递数据</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+</head>
+<body style="margin: 20px;">
+<div id="app">
+    <parent></parent>
+</div>
+<script src="vue2.0.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello Vue'
+        },
+        components: {
+            parent: {
+                template: '<div><h1>parent</h1><child :n="name"></child></div>',
+                data() {
+                    return {
+                        name: 'nzy'
+                    };
+                },
+                components: {
+                    child: {
+                        template: '<h2>child {{n}}</h2>',
+                        props: {n: String},
+                        data() {
+                            return {
+                                name: 'child'
+                            };
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

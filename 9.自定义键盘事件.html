@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义键盘事件</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" @keyup.a="up">
+    <ul>
+        <li v-for="data in datas"></li>
+    </ul>
+</div>
+<script src="vue2.0.js"></script>
+<script>
+    // Vue1.0
+//    Vue.directive('on').keyCodes = {
+//        a: 65,
+//        b: 66
+//    };
+
+    // Vue2.0
+    Vue.config.keyCodes = {
+        a: [65, 66],
+        b: 66
+    };
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'red',
+            datas: []
+        },
+        methods: {
+            up(e) {
+                alert('up');
+            }
+        }
+    });
+</script>
+</body>
+</html>

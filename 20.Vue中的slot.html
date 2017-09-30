@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中的slot</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+</head>
+<body style="margin: 20px;">
+<div id="app">
+    <hello>
+        <div slot="name">nzy</div>
+        <div slot="age">28</div>
+    </hello>
+</div>
+<script src="vue2.0.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        components: {
+            hello: {
+                template: '<h1>hello Vue <slot name="age"></slot> <slot name="name"></slot></h1>'
+            }
+        }
+    });
+</script>
+</body>
+</html>

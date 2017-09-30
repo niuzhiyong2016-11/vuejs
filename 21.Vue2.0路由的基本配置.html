@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue2.0路由的基本配置</title>
+</head>
+<body style="margin: 20px;">
+<div id="app">
+    <router-link to="/home">首页</router-link>
+    <router-link to="/list">列表页</router-link>
+    <router-view></router-view>
+</div>
+<script src="vue2.0.js"></script>
+<script src="vue-router2.0.js"></script>
+<script>
+    var Home = {template: '<h2>首页</h2>'};
+    var List = {template: '<h2>列表页</h2>'};
+    var router = new VueRouter({
+        routes: [
+            {path: '/home', component: Home},
+            {path: '/list', component: List},
+            {path: '*', component: Home}
+        ]
+    });
+    var vm = new Vue({
+        el: '#app',
+        router
+    });
+</script>
+</body>
+</html>

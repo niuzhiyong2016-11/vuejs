@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>父子数据不同步</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+</head>
+<body style="margin: 20px;">
+<div id="app">
+    <parent></parent>
+</div>
+<script src="vue2.0.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello Vue'
+        },
+        components: {
+            parent: {
+                template: '<div><h1>parent {{name}}</h1><child :n="name"></child></div>',
+                data() {
+                    return {
+                        name: 'nzy'
+                    };
+                },
+                methods: {
+
+                },
+                components: {
+                    child: {
+                        template: '<h2 @click="update">child {{a}}</h2>',
+                        props: {n: String},
+                        mounted() {
+                            this.a = this.n;
+                        },
+                        data() {
+                            return {
+                                a: ''
+                            };
+                        },
+                        methods: {
+                            update() {
+                                this.a = 'jw'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

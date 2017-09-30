@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>同级组件数据传递</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+</head>
+<body style="margin: 20px;">
+<div id="app">
+    <hello></hello>
+    <hello1></hello1>
+</div>
+<script src="vue2.0.js"></script>
+<script>
+    var Event = new Vue();
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello Vue',
+            temp: 'hello'
+        },
+        components: {
+            hello: {
+                template: '<div><h1>hello Vue</h1><button type="button" class="btn btn-success" @click="send">数据传递</button></div>',
+                data() {
+                    return {
+                        name: 'nzy'
+                    };
+                },
+                methods: {
+                    send() {
+                        Event.$emit('abc', this.name);
+                    }
+                }
+            },
+            hello1: {
+                template: '<h1>你好 {{n}}</h1>',
+                mounted() {
+                    Event.$on('abc', (data)=> {
+                        this.n = data;
+                    });
+                },
+                data() {
+                    return {
+                        n: ''
+                    };
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

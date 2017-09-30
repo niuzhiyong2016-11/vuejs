@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>实例上常用的属性</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+    <style>
+        [v-cloak] { display: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="app">
+        <p v-cloak>{{msg}}</p>
+        <p v-cloak>{{total}} {{count}}</p>
+    </div>
+</div>
+<script src="lib/vue/dist/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: '防止闪烁',
+            price: 100,
+            count: 2
+        },
+        computed: {
+            total: {
+                get: function () {
+                    return this.price * this.count;
+                },
+                set: function (total) {
+                    this.count = total / this.price;
+                }
+            }
+        },
+        name: 'nzy',
+        age: 1
+    });
+    /**
+     * $el
+     * $mount
+     * $data
+     * $watch
+     * $options
+     */
+    vm.$el.style.color = 'red';
+    console.log(vm.$data);
+    console.log(vm.$options);
+    vm.$watch('count', function (newVal, oldVal) {
+        console.log(newVal);
+        console.log(oldVal);
+    });
+    vm.total = 500;
+</script>
+</body>
+</html>
