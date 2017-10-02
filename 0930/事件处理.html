@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理</title>
+</head>
+<body>
+
+<div id="app">
+    <button @click="say($event, 'say')">事件</button>
+    <div @click="outer">
+        outer
+        <div @click="middle">
+            middle
+            <div @click="inner">inner</div>
+        </div>
+    </div>
+</div>
+
+<script src="vue2.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        methods: {
+            say: function (event, con) {
+                console.log(event);
+                alert(con);
+            },
+            outer: function () {
+                console.log('outer');
+            },
+            middle: function () {
+                console.log('middle');
+            },
+            inner: function () {
+                console.log('inner');
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>style 绑定内联样式</title>
+</head>
+<body>
+<div id="app">
+
+    <!--<h1 :style="{background:back,color:color}">hello vue</h1>-->
+
+    <h1 :style="[back,color]">hello vue</h1>
+
+</div>
+<script src="vue2.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            //flag: true,
+
+            //back: 'lightgreen',
+            //color: 'red'
+
+            back: {
+                background: 'lightgreen'
+            },
+            color: {
+                color: 'red'
+            }
+        }
+    });
+</script>
+</body>
+</html>

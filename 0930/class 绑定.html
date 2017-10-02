@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .back {
+            background: lightgreen;
+        }
+
+        .color {
+            font-size: 30px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <!--<p :class="{back:isBack?0:1, color:isColor}">hello vuejs</p>-->
+<!--</div>-->
+<p :class="[{back:!isBack},{color:!isColor}]">hello vuejs</p>
+</div>
+
+<script src="vue2.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            isBack: true,
+            isColor: false
+
+            //back: 'back',
+            //color: 'color'
+        }
+    });
+</script>
+</body>
+</html>
