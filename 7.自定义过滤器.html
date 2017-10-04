@@ -15,7 +15,8 @@
 <script src="vue2.0.js"></script>
 <script>
     Vue.filter('date', function (input, param1, param2) {
-        console.log(param1, param2); // 'aaa' 'bbb'
+        //console.log(arguments);
+        //console.log(param1, param2); // 'aaa' 'bbb'
         function addZero(data) {
             return data < 10 ? '0' + data : data;
         }

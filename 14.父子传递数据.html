@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>父子传递数据</title>
+    <title>父子组件传递数据</title>
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
 </head>
 <body style="margin: 20px;">
@@ -11,27 +11,22 @@
 </div>
 <script src="vue2.0.js"></script>
 <script>
-    var vm = new Vue({
+    new Vue({
         el: '#app',
-        data: {
-            msg: 'hello Vue'
-        },
         components: {
             parent: {
-                template: '<div><h1>parent</h1><child :n="name"></child></div>',
-                data() {
+                template: '<div><h1>parent</h1><child :n="msg"></child></div>',
+                data: function () {
                     return {
-                        name: 'nzy'
+                        msg: 'nzy'
                     };
                 },
                 components: {
                     child: {
                         template: '<h2>child {{n}}</h2>',
                         props: {n: String},
-                        data() {
-                            return {
-                                name: 'child'
-                            };
+                        data: function () {
+                            return {};
                         }
                     }
                 }

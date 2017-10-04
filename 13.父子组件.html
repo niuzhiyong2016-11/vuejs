@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Vue2.0生命周期</title>
+    <title>父子组件</title>
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
 </head>
 <body style="margin: 20px;">
@@ -21,7 +21,7 @@
                 template: '<div><h1>parent</h1><child></child></div>',
                 data() {
                     return {
-                        name: 'parent'
+                        //name: 'parent'
                     };
                 },
                 components: {
@@ -29,7 +29,7 @@
                         template: '<h2>child</h2>',
                         data() {
                             return {
-                                name: 'child'
+                                //name: 'child'
                             };
                         }
                     }
