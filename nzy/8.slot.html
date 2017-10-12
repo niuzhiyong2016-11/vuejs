@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>slot用法</title>
+</head>
+<body>
+<div id="app">
+    <!--<ul>
+        <li v-for="(val,key) in ary">{{val}} {{key}}</li>
+    </ul>-->
+    <parent>
+        123
+        <h3 slot="n">456</h3>
+        <h3 slot="a">789</h3>
+        000
+    </parent>
+</div>
+<script src="vue2.0.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            obj: {
+                name: 'nzy',
+                age: 123
+            },
+            ary: [1, 2, 3, 4, 1, 2, 3, 4]
+        },
+        components: {
+            parent: {
+                template: '<div>parent <slot name="n"></slot> <slot name="a"></slot> <slot></slot></div>'
+            }
+        }
+    });
+</script>
+</body>
+</html>

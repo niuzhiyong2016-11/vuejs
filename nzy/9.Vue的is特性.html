@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的is特性</title>
+</head>
+<body>
+<div id="app">
+    <button @click="comp='hello1'">hello1</button>
+    <button @click="comp='hello2'">hello2</button>
+    <keep-alive>
+        <component :is="comp"></component>
+    </keep-alive>
+</div>
+<script src="vue2.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            comp: 'hello1'
+        },
+        components: {
+            hello1: {
+                template: '<h1>111111</h1>'
+            },
+            hello2: {
+                template: '<h1>222222</h1>'
+            }
+        }
+    });
+</script>
+</body>
+</html>

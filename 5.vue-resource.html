@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>事件处理</title>
+    <title>Vue-resource</title>
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
 </head>
 <body style="margin: 20px auto;">
@@ -14,17 +14,16 @@
         <input type="text" v-model="query">
         <h3>{{msg}}</h3>
         <ul class="list-group">
-            <li :style="{cursor:'pointer'}" :class="{active:index===key}" @mouseenter="enter" class="list-group-item" v-for="(data,key) in datas">{{data}}</li>
+            <li :style="{cursor:'pointer'}" :class="{active:index===key}" @mouseenter="enter" class="list-group-item"
+                v-for="(data,key) in datas">{{data}}
+            </li>
         </ul>
     </div>
 </div>
 <script src="lib/vue/dist/vue.js"></script>
 <script src="lib/vue-resource/dist/vue-resource.js"></script>
 <script>
-    /**
-     *
-     */
-    var vm = new Vue({
+    new Vue({
         el: '#app',
         data: {
             msg: '',
@@ -35,12 +34,13 @@
         methods: {
             getUser() {
                 this.$http.get('/getUser').then(function (res) {
+                    //console.log(res);
                     this.msg = res.body.msg;
                 });
             },
             postUser() {
-                this.$http.post('/postUser', { msg: '发送数据成功' }).then(function (res) {
-                    console.log(res.body);
+                this.$http.post('/postUser', {msg: '发送数据成功'}).then(function (res) {
+                    //console.log(res);
                     this.msg = res.body.msg;
                 });
             },
@@ -52,12 +52,13 @@
                         },
                         jsonp: 'cb'
                     }).then(function (res) {
+                    //console.log(res);
                     this.datas = res.body.s;
                 });
             },
             enter(e) {
                 var text = e.target.innerText;
-                this.datas.forEach((item, index)=> {
+                this.datas.forEach((item, index) => {
                     if (item === text) {
                         this.index = index;
                     }

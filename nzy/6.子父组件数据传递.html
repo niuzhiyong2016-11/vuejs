@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>子父组件数据传递</title>
+</head>
+<body>
+<div id="app">
+    <parent></parent>
+</div>
+<script src="vue2.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        components: {
+            parent: {
+                template: '<div><h1>parent {{age}}</h1><child @p="changeAge"></child></div>',
+                data() {
+                    return {age: 0};
+                },
+                methods: {
+                    changeAge(data) {
+                        this.age = data;
+                    }
+                },
+                components: {
+                    child: {
+                        template: '<h2 @click="sayAge">child {{age}}</h2>',
+                        data() {
+                            return {age: 123};
+                        },
+                        methods: {
+                            sayAge() {
+                                this.$emit('p', this.age);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
