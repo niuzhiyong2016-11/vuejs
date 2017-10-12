@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子数据传递</title>
+</head>
+<body>
+<div id="app">
+    <parent></parent>
+</div>
+
+<template id="parent">
+    <div><h1>parent</h1><child :age="age"></child></div>
+</template>
+
+<template id="child">
+    <h2 @click="fn">child {{a}}</h2>
+</template>
+<script src="vue2.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {},
+        components: {
+            parent: {
+                template: '#parent',
+                data: function () {
+                    return {
+                        age: 123
+                    };
+                },
+                components: {
+                    child: {
+                        template: '#child',
+                        props: {age: Number},
+                        data: function () {
+                            return {
+                                a: null
+                            };
+                        },
+                        mounted: function () {
+                            this.a = this.age;
+                        },
+                        methods: {
+                            fn: function () {
+                                this.a = 456;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
